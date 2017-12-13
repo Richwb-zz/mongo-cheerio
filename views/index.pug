@@ -1,0 +1,20 @@
+extends layout
+
+block content
+	h1= title
+	p Welcome to #{title}
+	each result in results
+
+		a(href=result.url) #{result.title}
+		p Published: #{result.publishtime}
+		br
+		img(src=result.image)
+		p #{result.excerpt}
+		h2 Comments
+		each comment, index in result.comments
+			div 
+				span(id=result._id + index) #{comment}
+				button(class="delete" data-newsid=result._id + index) delete
+		form(method="POST")
+			textarea(id=result._id + "-comment" type="textarea" value="" col="6")
+			input(class="submit" type="submit" value="submit" data-newsid=result._id)
